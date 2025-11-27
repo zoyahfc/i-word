@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Christmas Crossword</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a4f8e, #0d2a4d);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2.4rem;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        /* Grid styling */
+        .crossword {
+            display: inline-grid;
+            grid-template-columns: repeat(10, 40px);
+            grid-gap: 2px;
+            background: #2c2c2c;
+            padding: 8px;
+            border-radius: 10px;
+            margin: 0 auto 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: #222;
+            position: relative;
+            border-radius: 4px;
+            box-shadow: inset 0 0 2px rgba(0,0,0,0.1);
+        }
+        .cell.black {
+            background: #333;
+        }
+        .cell.number::before {
+            content: attr(data-num);
+            position: absolute;
+            top: 2px;
+            left: 3px;
+            font-size: 10px;
+            color: #777;
+            font-weight: bold;
+        }
+
+        /* Clues */
+        .clues {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.08);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .clues h2 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+        .horizontal, .vertical {
+            margin-bottom: 20px;
+        }
+        .clue {
+            margin: 6px 0;
+            line-height: 1.4;
+        }
+        .num {
+            display: inline-block;
+            width: 20px;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎄 Christmas Crossword</h1>
+    <div class="subtitle">Fill in the 5 holiday-themed English words!</div>
+
+    <div class="crossword" id="grid"></div>
+
+    <div class="clues">
+        <h2>Clues</h2>
+
+        <div class="horizontal">
+            <h3>Across:</h3>
+            <div class="clue"><span class="num">1.</span> A small vehicle on runners, pulled over snow (4 letters)</div> <!-- SLED -->
+            <div class="clue"><span class="num">3.</span> Frozen water crystals that fall from the sky (4 letters)</div> <!-- SNOW -->
+            <div class="clue"><span class="num">5.</span> A decorative string of lights or flags (7 letters)</div> <!-- GARLAND -->
+        </div>
+
+        <div class="vertical">
+            <h3>Down:</h3>
+            <div class="clue"><span class="num">1.</span> A thin layer of ice crystals on surfaces (5 letters)</div> <!-- FROST -->
+            <div class="clue"><span class="num">2.</span> A single ice crystal with a symmetrical pattern (9 letters)</div> <!-- SNOWFLAKE -->
+        </div>
+    </div>
+
+    <footer>
+        Words: Sled, Garland, Frost, Snow, Snowflake
+    </footer>
+
+    <script>
+        // Grid size: 10x10
+        const size = 10;
+        let grid = Array(size).fill().map(() => Array(size).fill(''));
+
+        // Define words with position [row, col] (1-based), direction ('h' or 'v'), number
+        const words = [
+            // Across
+            { word: "SLED",     num: 1, start: [1, 1], dir: 'h' },
+            { word: "SNOW",     num: 3, start: [3, 3], dir: 'h' },
+            { word: "GARLAND",  num: 5, start: [5, 1], dir: 'h' },
+            // Down
+            { word: "FROST",    num: 1, start: [1, 1], dir: 'v' },    // shares 'S' with SLED
+            { word: "SNOWFLAKE",num: 2, start: [1, 4], dir: 'v' }     // 'S' at [1,4], crosses SNOW at 'N' (row 3, col 4)
+        ];
+
+        // Place words on grid
+        words.forEach(w => {
+            const [r0, c0] = w.start;
+            for (let i = 0; i < w.word.length; i++) {
+                let r = r0 - 1, c = c0 - 1;
+                if (w.dir === 'h') c += i;
+                else r += i;
+                if (r >= 0 && r < size && c >= 0 && c < size) {
+                    grid[r][c] = w.word[i];
+                }
+            }
+        });
+
+        // Numbers map: key = "r,c", value = clue number
+        const numbers = {};
+        words.forEach(w => {
+            const [r, c] = w.start;
+            const key = `${r-1},${c-1}`;
+            numbers[key] = w.num;
+        });
+
+        // Render grid
+        const container = document.getElementById('grid');
+        for (let r = 0; r < size; r++) {
+            for (let c = 0; c < size; c++) {
+                const cell = document.createElement('div');
+                const key = `${r},${c}`;
+                if (grid[r][c]) {
+                    cell.className = 'cell';
+                    cell.textContent = grid[r][c];
+                    if (numbers[key]) {
+                        cell.classList.add('number');
+                        cell.dataset.num = numbers[key];
+                    }
+                } else {
+                    cell.className = 'cell black';
+                }
+                container.appendChild(cell);
+            }
+        }
+    </script>
+</body>
+</html>
