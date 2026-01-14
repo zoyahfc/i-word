@@ -8,7 +8,39 @@
     <p>Создано: 14 января 2026 года</p>
  <p>Домен - https://zoyahfc.github.io/i-word/ </p>
  <p>Напишите мне: <a href="mailto:chikinazoya@gmail.com">diana@example.com</a></p>
-    
+    from urllib.parse import urlparse
+
+def parse_domain(url):
+    # Убираем протокол и путь, оставляем только домен
+    parsed = urlparse(url)
+    domain = parsed.netloc  # Например: 'zoyahfc.github.io'
+
+    parts = domain.split('.')
+
+    if len(parts) >= 3:
+        subdomain = parts[0]      # zoyahfc
+        second_level = parts[1]   # github
+        tld = '.'.join(parts[2:]) # io (или co.uk и т.п., если бы было)
+    elif len(parts) == 2:
+        subdomain = None
+        second_level = parts[0]
+        tld = parts[1]
+    else:
+        raise ValueError("Некорректный домен")
+
+    return {
+        "full_domain": domain,
+        "subdomain (3rd level)": subdomain,
+        "second_level_domain (2nd level)": second_level,
+        "top_level_domain (1st level)": tld
+    }
+
+# Пример использования
+url = "https://zoyahfc.github.io/i-word/"
+result = parse_domain(url)
+
+for key, value in result.items():
+    print(f"{key}: {value}")
     <blockquote class=“q”>Путешествие в тысячу миль начинается с одного шага (Лао Цзы) </blockquote>
     <h2> 1 декабря, 2025</h2>
 <img src=“Icons/free-icon-santa-claus-6259522.png” alt=“Новый год”>
