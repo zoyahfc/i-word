@@ -8,25 +8,37 @@
     <p>Создано: 14 января 2026 года</p>
  <p>Домен - https://zoyahfc.github.io/i-word/ </p>
  <p>Напишите мне: <a href="mailto:chikinazoya@gmail.com"></a></p>
-    from urllib.parse import urlparse
+   from urllib.parse import urlparse
 
 def parse_domain(url):
-    # Убираем протокол и путь, оставляем только домен
+    # Удаляем лишние пробелы по краям
+    url = url.strip()
+    
+    # Разбираем URL
     parsed = urlparse(url)
-    domain = parsed.netloc  # Например: 'zoyahfc.github.io'
+    domain = parsed.netloc.lower()  # Приводим к нижнему регистру для единообразия
+
+    if not domain:
+        raise ValueError("Не удалось извлечь домен из URL")
 
     parts = domain.split('.')
 
+    # Минимум два уровня: second-level + TLD (например, example.com)
+    if len(parts) < 2:
+        raise ValueError("Некорректный домен: недостаточно уровней")
+
+    # Для доменов вида xxx.github.io:
+    # - subdomain = xxx
+    # - second-level = github
+    # - TLD = io
     if len(parts) >= 3:
-        subdomain = parts[0]      # zoyahfc
-        second_level = parts[1]   # github
-        tld = '.'.join(parts[2:]) # io (или co.uk и т.п., если бы было)
-    elif len(parts) == 2:
+        subdomain = parts[0]
+        second_level = parts[1]
+        tld = '.'.join(parts[2:])
+    else:
         subdomain = None
         second_level = parts[0]
         tld = parts[1]
-    else:
-        raise ValueError("Некорректный домен")
 
     return {
         "full_domain": domain,
@@ -36,7 +48,7 @@ def parse_domain(url):
     }
 
 # Пример использования
-url = "https://zoyahfc.github.io/i-word/"
+url = "https://zoyahfc.github.io/i-word/  "  # Обратите внимание на пробелы в конце
 result = parse_domain(url)
 
 for key, value in result.items():
