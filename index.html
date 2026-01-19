@@ -14,51 +14,18 @@
     <p>Создано: 14 января 2026 года</p>
  <p>Домен - https://zoyahfc.github.io/i-word/ </p>
  <p>Напишите мне: <a href="mailto:chikinazoya@gmail.com"></a></p>
-   from urllib.parse import urlparse
+  <div class="domain-info">
+    <strong>Структура домена сайта:</strong>
+    <ul style="margin-top: 10px; margin-bottom: 0;">
+      <li><strong>3-й уровень (пользователь):</strong> <code>zoyahfc</code></li>
+      <li><strong>2-й уровень (сервис):</strong> <code>github</code></li>
+      <li><strong>1-й уровень (доменная зона):</strong> <code>.io</code></li>
+    </ul>
+    <p style="margin-top: 12px; margin-bottom: 0;">
+      <em>Путь к сайту: <code>/i-word/</code> — это имя репозитория на GitHub.</em>
+    </p>
+  </div>
 
-def parse_domain(url):
-    # Удаляем лишние пробелы по краям
-    url = url.strip()
-    
-    # Разбираем URL
-    parsed = urlparse(url)
-    domain = parsed.netloc.lower()  # Приводим к нижнему регистру для единообразия
-
-    if not domain:
-        raise ValueError("Не удалось извлечь домен из URL")
-
-    parts = domain.split('.')
-
-    # Минимум два уровня: second-level + TLD (например, example.com)
-    if len(parts) < 2:
-        raise ValueError("Некорректный домен: недостаточно уровней")
-
-    # Для доменов вида xxx.github.io:
-    # - subdomain = xxx
-    # - second-level = github
-    # - TLD = io
-    if len(parts) >= 3:
-        subdomain = parts[0]
-        second_level = parts[1]
-        tld = '.'.join(parts[2:])
-    else:
-        subdomain = None
-        second_level = parts[0]
-        tld = parts[1]
-
-    return {
-        "full_domain": domain,
-        "subdomain (3rd level)": subdomain,
-        "second_level_domain (2nd level)": second_level,
-        "top_level_domain (1st level)": tld
-    }
-
-# Пример использования
-url = "https://zoyahfc.github.io/i-word/  "  # Обратите внимание на пробелы в конце
-result = parse_domain(url)
-
-for key, value in result.items():
-    print(f"{key}: {value}")
     <blockquote class=“q”>Путешествие в тысячу миль начинается с одного шага (Лао Цзы) </blockquote>
     <h2> 1 декабря, 2025</h2>
 <img src=“Icons/free-icon-santa-claus-6259522.png” alt=“Новый год”>
