@@ -6,12 +6,11 @@
   <title>Сайт с шрифтом Pudelinka</title>
   <style>
     /* Подключение шрифта Pudelinka */
-    @font-face {
-      font-family: 'Pudelinka';
-      src: url('Pudelinka.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
+@font-face {
+  font-family: 'Pudelinka';
+  src: url('fonts/Pudelinka.ttf') format('truetype');
+}
+    
 
     /* Сброс стилей */
     * {
