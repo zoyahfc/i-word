@@ -200,40 +200,33 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>i-word</title>
+  <title>Pudelinka Example</title>
   <style>
-    body {
-      background-color: #d2b48c;
-      padding: 20px;
-      font-family: sans-serif;
-    }
-
-    /* Подключение шрифта Pudelinka */
+    /* Подключаем шрифт Pudelinka */
     @font-face {
       font-family: 'Pudelinka';
       src: url('https://zoyahfc.github.io/i-word/fonts/Pudelinka.ttf') format('truetype');
     }
 
-    /* Класс для одной строки */
+    /* Класс для применения шрифта */
     .pudelinka {
       font-family: 'Pudelinka', cursive;
-      font-size: 28px;
-      margin: 20px 0;
+      font-size: 32px;
+      color: #2c1810;
     }
   </style>
 </head>
 <body>
 
-  <!-- Пример других записей -->
-  <h2>19 января, 2025</h2>
-  <p>Определение ключей шифра Цезаря...</p>
+  <p>Обычный текст (sans-serif)</p>
 
-  <!-- Строка, которую нужно оформить шрифтом Pudelinka -->
-  <h2 class="pudelinka">21 января, 2025</h2>
+  <!-- Эта строка будет шрифтом Pudelinka -->
+  <p class="pudelinka">21 января, 2025</p>
 
-  <!-- Далее — ваш RSA-контент или другой контент -->
-  <h1>Учебный RSA: p = 3, q = 7</h1>
-  <!-- ... -->
+  <p>Снова обычный текст.</p>
+
+</body>
+</html>
 
 </body>
 </html> 
