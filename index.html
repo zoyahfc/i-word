@@ -114,45 +114,43 @@
 
 </body>
     <h2> 21 января, 2025</h2> 
-      
-# Шаг 1: задаём простые числа
-p = 3
-q = 7
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>RSA Ключи</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    .key-box { background: white; padding: 15px; margin: 10px 0; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+  <h1>🎓 Учебные RSA-ключи</h1>
+  <p>На основе простых чисел <code>p = 3</code>, <code>q = 7</code></p>
 
-# Шаг 2: вычисляем n и φ(n)
-n = p * q
-phi = (p - 1) * (q - 1)
+  <div class="key-box">
+    <strong>Модуль (n):</strong> <code id="n">21</code>
+  </div>
 
-print(f"p = {p}, q = {q}")
-print(f"n = p * q = {n}")
-print(f"φ(n) = (p-1)*(q-1) = {phi}")
+  <div class="key-box">
+    <strong>Открытый ключ (e, n):</strong> <code id="public">(5, 21)</code>
+  </div>
 
-# Шаг 3: выбираем открытую экспоненту e
-# Должно быть: 1 < e < phi и gcd(e, phi) = 1
-e = None
-for candidate in range(2, phi):
-    if gcd(candidate, phi) == 1:
-        e = candidate
-        break
+  <script>
+    // Можно генерировать динамически (для учебных целей)
+    const p = 3, q = 7;
+    const n = p * q;
+    const phi = (p - 1) * (q - 1);
+    const e = 5; // взаимно простое с phi
 
-print(f"Выбрано e = {e} (взаимно просто с φ(n))")
+    document.getElementById('n').textContent = n;
+    document.getElementById('public').textContent = `(${e}, ${n})`;
 
-# Шаг 4: находим закрытую экспоненту d
-d = mod_inverse(e, phi)
-print(f"Найдено d = {d}, так как ({e} * {d}) mod {phi} = {(e * d) % phi}")
+    console.log("Открытый ключ для https://zoyahfc.github.io/i-word/:", { e, n });
+  </script>
+</body>
+</html>     
 
-# Результат
-print("\n🔑 Открытый ключ (e, n):", (e, n))
-print("🔒 Закрытый ключ (d, n):", (d, n))
-
-# Пример шифрования и расшифровки
-m = 2  # исходное сообщение (должно быть < n)
-c = pow(m, e, n)      # шифрование: c = m^e mod n
-m_decrypted = pow(c, d, n)  # расшифровка: m = c^d mod n
-
-print(f"\nСообщение: {m}")
-print(f"Шифротекст: {c}")
-print(f"Расшифровано: {m_decrypted}")
 </html>
 </html>
 </html>
