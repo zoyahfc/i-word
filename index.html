@@ -114,40 +114,89 @@
 
 </body>
     <h2> 21 января, 2025</h2> 
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>RSA Ключи</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
-    .key-box { background: white; padding: 15px; margin: 10px 0; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-  </style>
+  <meta charset="UTF-8">
+  <title>Учебный RSA: p=3, q=7</title>
 </head>
 <body>
-  <h1>🎓 Учебные RSA-ключи</h1>
-  <p>На основе простых чисел <code>p = 3</code>, <code>q = 7</code></p>
 
-  <div class="key-box">
-    <strong>Модуль (n):</strong> <code id="n">21</code>
-  </div>
+<h1>Учебный RSA: p = 3, q = 7</h1>
 
-  <div class="key-box">
-    <strong>Открытый ключ (e, n):</strong> <code id="public">(5, 21)</code>
-  </div>
+<h2>Ключи</h2>
+<p>p = 3</p>
+<p>q = 7</p>
+<p>n = p * q = 21</p>
+<p>φ(n) = (p-1)*(q-1) = 12</p>
+<p>Открытый ключ (e, n): (5, 21)</p>
+<p>Закрытый ключ (d, n): (5, 21)</p>
 
-  <script>
-    // Можно генерировать динамически (для учебных целей)
-    const p = 3, q = 7;
-    const n = p * q;
-    const phi = (p - 1) * (q - 1);
-    const e = 5; // взаимно простое с phi
+<h2>Шифрование и расшифровка</h2>
+<label for="message">Сообщение m (целое число от 1 до 20):</label><br>
+<input type="number" id="message" min="1" max="20" value="2"><br><br>
 
-    document.getElementById('n').textContent = n;
-    document.getElementById('public').textContent = `(${e}, ${n})`;
+<button onclick="encrypt()">Зашифровать</button>
+<button onclick="decrypt()">Расшифровать</button>
 
-    console.log("Открытый ключ для https://zoyahfc.github.io/i-word/:", { e, n });
-  </script>
+<div id="output"></div>
+
+<h2>Реальное число n в RSA-2048 (617 цифр)</h2>
+<p>В настоящих системах (например, HTTPS) модуль n выглядит примерно так:</p>
+<pre id="realN" style="font-family: monospace; white-space: pre-wrap;"></pre>
+
+<script>
+  const n = 21;
+  const e = 5;
+  const d = 5;
+
+  function modPow(base, exp, mod) {
+    let result = 1n;
+    base = BigInt(base) % BigInt(mod);
+    exp = BigInt(exp);
+    mod = BigInt(mod);
+    while (exp > 0n) {
+      if (exp % 2n === 1n) result = (result * base) % mod;
+      exp = exp >> 1n;
+      base = (base * base) % mod;
+    }
+    return Number(result);
+  }
+
+  function encrypt() {
+    const m = parseInt(document.getElementById('message').value);
+    if (isNaN(m) || m <= 0 || m >= n) {
+      document.getElementById('output').innerHTML = 'Ошибка: сообщение должно быть целым числом от 1 до 20.';
+      return;
+    }
+    const c = modPow(m, e, n);
+    document.getElementById('output').innerHTML = 
+      'Сообщение: ' + m + '<br>' +
+      'Шифротекст (c = m^e mod n): ' + c;
+  }
+
+  function decrypt() {
+    const cInput = prompt("Введите шифротекст c (целое число):");
+    const c = parseInt(cInput);
+    if (isNaN(c)) {
+      document.getElementById('output').innerHTML = 'Ошибка: введено некорректное число.';
+      return;
+    }
+    const m = modPow(c, d, n);
+    document.getElementById('output').innerHTML = 
+      'Шифротекст: ' + c + '<br>' +
+      'Расшифровано (m = c^d mod n): ' + m;
+  }
+
+  // Пример реального n (RSA-2048)
+  const realN = 
+`2519590847565789349402718324004839857142928212620403202777713783604366202070759555626401852588078440691829064124951508218929855914917618450280812359361230675234534480209307093838320824629797312509526368753047408535278748578122552273069938518187576221778511228936093528806823012245447402112700385136867514899591532833592433471278722260577134785701000555559995462743043287716344611062603239033332171334859343633528592919420532102303720731126861819335435763333520201899463671280343335300203375773337525783057216255752504982224782129340381333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333......`;
+
+  document.getElementById('realN').textContent = realN;
+</script>
+
+</body>
+</html>
 </body>
 </html>     
 
