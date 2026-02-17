@@ -42,28 +42,91 @@
       <em>Путь к сайту: <code>/i-word/</code> — это имя репозитория на GitHub.</em>
     </h2>
   </div>
-      <!-- Начало блока с предсказанием -->
-<div id="prediction-block" style="font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px;">
-    <div style="font-size: 24px; font-weight: bold; margin-bottom: 20px; text-align: center;">17 февраля</div>
+     <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Предсказание изображения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .date {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .predictions {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .predictions h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .prediction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+        }
+        .prediction-name {
+            font-weight: bold;
+            color: #333;
+        }
+        .prediction-percent {
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="date">17 февраля</div>
     
-    <div style="text-align: center; margin-bottom: 20px;">
-        <img src="orchid.jpg" alt="Изображение" style="max-width: 100%; border-radius: 10px;">
+    <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1566928601-4a1b5d6c8f0e?w=800" alt="Орхидея">
     </div>
     
-    <div style="background-color: #f9f9f9; padding: 20px; border-radius: 10px;">
+    <div class="predictions">
         <h3>Топ-3 предсказания:</h3>
-        <div style="padding: 10px; margin: 10px 0; background-color: white; border-radius: 5px; border-left: 4px solid #4CAF50;">
-            <strong>pinwheel:</strong> <span style="color: #4CAF50; font-weight: bold;">24.12%</span>
+        <div class="prediction-item">
+            <span class="prediction-name">pinwheel</span>
+            <span class="prediction-percent">24.12%</span>
         </div>
-        <div style="padding: 10px; margin: 10px 0; background-color: white; border-radius: 5px; border-left: 4px solid #4CAF50;">
-            <strong>bee:</strong> <span style="color: #4CAF50; font-weight: bold;">17.59%</span>
+        <div class="prediction-item">
+            <span class="prediction-name">bee</span>
+            <span class="prediction-percent">17.59%</span>
         </div>
-        <div style="padding: 10px; margin: 10px 0; background-color: white; border-radius: 5px; border-left: 4px solid #4CAF50;">
-            <strong>rapeseed:</strong> <span style="color: #4CAF50; font-weight: bold;">12.30%</span>
+        <div class="prediction-item">
+            <span class="prediction-name">rapeseed</span>
+            <span class="prediction-percent">12.30%</span>
         </div>
     </div>
-</div>
-<!-- Конец блока с предсказанием -->
+</body>
+</html>
 
       <h2>24 декабря, 2025</h2>
     <p>Поздравляю с наступающим рождеством 2026! <a href="Koladka.odt" title="колядка" download>Колядка 20.12.2025</a>
