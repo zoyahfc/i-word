@@ -732,6 +732,73 @@ async function predictCredit() {
 // Загрузить метрики при открытии страницы
 document.addEventListener('DOMContentLoaded', loadMetrics);
 </script>
+  <script type="py" config="./pyconfig.toml">
+import pandas as pd
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')  # Важно для работы без GUI
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from js import document
+import base64
+from io import BytesIO
+
+def generate_casco_dataset(n_samples=1000, random_seed=42):
+    np.random.seed(random_seed)
+    age = np.random.randint(18, 81, size=n_samples)
+    experience = [np.random.randint(0, max(a - 18 + 1, 1)) for a in age]
+    accidents = []
+    for a, e in zip(age, experience):
+        risk = 1.5 if (a < 23 and e < 3) else (0.3 if e > 10 else 0.5)
+        accidents.append(np.random.poisson(risk))
+    casco = []
+    for a, e, acc in zip(age, experience, accidents):
+        p = 0.95
+        if a < 21: p -= 0.4
+        elif a < 25: p -= 0.2
+        if e < 1: p -= 0.3
+        elif e < 3: p -= 0.1
+        if acc >= 3: p = 0
+        elif acc == 2: p -= 0.5
+        elif acc == 1: p -= 0.2
+        casco.append(1 if np.random.rand() < max(p, 0) else 0)
+    return pd.DataFrame({'age': age, 'experience_years': experience, 'accidents_count': accidents, 'casco_approved': casco})
+
+def build_tree_image():
+    df = generate_casco_dataset(1000)
+    X = df[['age', 'experience_years', 'accidents_count']]
+    y = df['casco_approved']
+    
+    clf = DecisionTreeClassifier(max_depth=4, min_samples_leaf=5, random_state=42)
+    clf.fit(X, y)
+    
+    plt.figure(figsize=(20, 12), dpi=100)
+    plot_tree(clf, feature_names=['Возраст', 'Стаж', 'ДТП'], 
+              class_names=['Отказ', 'Одобрено'], filled=True, 
+              rounded=True, fontsize=10, proportion=True)
+    plt.title('🌳 Дерево решений: Прогноз КАСКО', fontsize=14, pad=15)
+    
+    # Конвертация в base64 для вставки в HTML
+    buf = BytesIO()
+    plt.savefig(buf, format='png', bbox_inches='tight', facecolor='white')
+    buf.seek(0)
+    img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    plt.close()
+    
+    # Вставка изображения в страницу
+    container = document.getElementById("tree-container")
+    container.innerHTML = f'''
+        <img src="data:image/png;base64,{img_base64}" 
+             alt="Дерево решений" 
+             style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+        <div style="margin-top:15px; color:#666; font-size:0.9em;">
+            💜 Фиолетовый = Отказ | 💚 Зелёный = Одобрено
+        </div>
+    '''
+
+# Запуск после загрузки страницы
+build_tree_image()
+</script>
 </body>
 </html>
 
