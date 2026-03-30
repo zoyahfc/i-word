@@ -935,6 +935,394 @@ build_tree_image()
     </div>
 </body>
 </html>
+  <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как работает нейросеть | Students Performance</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover { text-decoration: underline; }
+        
+        /* Секции */
+        section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        h2 {
+            color: #667eea;
+            margin: 25px 0 15px;
+            font-size: 22px;
+        }
+        h3 {
+            color: #555;
+            margin: 20px 0 10px;
+            font-size: 18px;
+        }
+        p { margin-bottom: 12px; color: #444; }
+        
+        /* Таблицы */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        tr:nth-child(even) { background: #f9f9f9; }
+        tr:hover { background: #f1f1f1; }
+        
+        /* Карточки */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .card strong { display: block; color: #667eea; margin-bottom: 5px; }
+        
+        /* Код и формулы */
+        code {
+            background: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #d63384;
+        }
+        .formula {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: monospace;
+            text-align: center;
+            color: #333;
+        }
+        
+        /* Блок результатов */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+        .metric-name { font-size: 14px; opacity: 0.9; }
+        
+        /* Шаги обучения */
+        .steps {
+            counter-reset: step;
+            margin: 20px 0;
+        }
+        .step {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 20px;
+        }
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 35px;
+            height: 35px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container { padding: 25px; }
+            .metrics { grid-template-columns: 1fr; }
+            table { font-size: 12px; }
+            th, td { padding: 8px; }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            font-size: 12px;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="https://zoyahfc.github.io/i-word/" class="back-link">← Назад к результатам</a>
+        <h1>🧠 Как работает нейронная сеть</h1>
+        <p class="subtitle">Простое объяснение логики модели для Students Performance</p>
+        
+        <!-- Сравнение моделей -->
+        <section>
+            <h2>📊 Сравнение с другими моделями</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Модель</th>
+                        <th>Как работает</th>
+                        <th>Аналогия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Линейная регрессия</strong></td>
+                        <td><code>y = w₁x₁ + w₂x₂ + b</code></td>
+                        <td>Прямая линия, проводящая связь между признаками и целью</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Дерево решений</strong></td>
+                        <td><code>Если признак > порог → влево/вправо</code></td>
+                        <td>Серия вопросов «да/нет», как в игре «20 вопросов»</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Нейронная сеть</strong></td>
+                        <td><code>Слой 1 → Слой 2 → Прогноз</code></td>
+                        <td>Команда экспертов, последовательно обрабатывающих информацию</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Архитектура -->
+        <section>
+            <h2>🏗️ Архитектура вашей сети</h2>
+            <div class="formula">
+                Вход (4 признака) → Скрытый слой (2 нейрона) → Выход (1 прогноз)
+            </div>
+            
+            <h3>📥 Шаг 1: Входные данные</h3>
+            <p>После масштабирования каждый признак в диапазоне [0, 1]:</p>
+            <code>[gender=0, lunch=1, test_prep=1, reading=0.85]</code>
+            
+            <h3>🔗 Шаг 2: Скрытый слой (взвешенная сумма)</h3>
+            <p>Каждый нейрон считает взвешенную сумму входов:</p>
+            <div class="formula">
+                Нейрон А: (0×w₁) + (1×w₂) + (1×w₃) + (0.85×w₄) + bias → z₁
+            </div>
+            
+            <h3>⚡ Шаг 3: Функция активации (сигмоида)</h3>
+            <p>Сигмоида «сжимает» любое число в диапазон (0, 1):</p>
+            <div class="formula">
+                σ(z) = 1 / (1 + e⁻ᶻ)
+            </div>
+            <p>Это позволяет сети улавливать <strong>нелинейные зависимости</strong>.</p>
+            
+            <h3>📤 Шаг 4: Выходной слой</h3>
+            <p>Выходной нейрон объединяет результаты скрытых нейронов и выдаёт прогноз <code>math score</code>.</p>
+        </section>
+        
+        <!-- Обучение -->
+        <section>
+            <h2>🔁 Как сеть учится? (Backpropagation)</h2>
+            <p>Аналогия: <strong>настройка старого радио</strong> 📻</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <strong>Прямой проход:</strong> Вход → Сеть → Прогноз
+                </div>
+                <div class="step">
+                    <strong>Расчёт ошибки:</strong> <code>loss = (прогноз - истинное)²</code>
+                </div>
+                <div class="step">
+                    <strong>Обратный проход:</strong> Вычисляем, какие веса «виноваты» в ошибке (градиенты)
+                </div>
+                <div class="step">
+                    <strong>Обновление весов:</strong> <code>weight = weight - lr × градиент</code>
+                </div>
+                <div class="step">
+                    <strong>Повтор:</strong> 1000 эпох → ошибка уменьшается 📉
+                </div>
+            </div>
+            
+            <h3>📈 Прогресс обучения (пример):</h3>
+            <div class="cards">
+                <div class="card">
+                    <strong>Эпоха 0</strong>
+                    Ошибка: 0.250000 ❌
+                </div>
+                <div class="card">
+                    <strong>Эпоха 500</strong>
+                    Ошибка: 0.012456 ⚠️
+                </div>
+                <div class="card">
+                    <strong>Эпоха 1000</strong>
+                    Ошибка: 0.004016 🎯
+                </div>
+            </div>
+        </section>
+        
+        <!-- Результаты -->
+        <section>
+            <h2>🎯 Ваши результаты</h2>
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-name">MSE</div>
+                    <div class="metric-value">0.004016</div>
+                    <div style="font-size:12px;opacity:0.8">Среднеквадратичная ошибка</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-name">RMSE</div>
+                    <div class="metric-value">0.063374</div>
+                    <div style="font-size:12px;opacity:0.8">Корень из MSE</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-name">MAE</div>
+                    <div class="metric-value">0.048755</div>
+                    <div style="font-size:12px;opacity:0.8">Средняя абсолютная ошибка</div>
+                </div>
+            </div>
+            
+            <h3>✅ Почему ошибки такие низкие?</h3>
+            <div class="cards">
+                <div class="card">
+                    <strong>reading score</strong>
+                    Сильно коррелирует с math score
+                </div>
+                <div class="card">
+                    <strong>Масштабирование</strong>
+                    Все признаки в [0, 1] → стабильное обучение
+                </div>
+                <div class="card">
+                    <strong>Архитектура 4→2→1</strong>
+                    Достаточно сложная, но без переобучения
+                </div>
+                <div class="card">
+                    <strong>1000 эпох + SGD</strong>
+                    Веса успели «устаканиться»
+                </div>
+            </div>
+        </section>
+        
+        <!-- Интерпретация -->
+        <section>
+            <h2>🔍 Что «видит» сеть в данных?</h2>
+            
+            <h3>Линейная регрессия:</h3>
+            <div class="formula">
+                math = 0.65×reading + 0.12×lunch + 0.08×test_prep + 0.1
+            </div>
+            
+            <h3>Дерево решений:</h3>
+            <div class="formula" style="text-align:left;font-size:13px">
+                Если reading > 0.7:<br>
+                &nbsp;&nbsp;Если test_prep == 1 → math ≈ 0.85<br>
+                &nbsp;&nbsp;Иначе → math ≈ 0.72<br>
+                Иначе → math ≈ 0.55
+            </div>
+            
+            <h3>Нейронная сеть:</h3>
+            <p>Сеть находит <strong>сложные комбинации признаков</strong>, которые человек мог бы упустить:</p>
+            <div class="formula" style="text-align:left;font-size:13px">
+                «Если чтение высокое И подготовка есть, но обед бесплатный →<br>
+                математика будет средней, потому что...»
+            </div>
+            <p style="margin-top:10px;font-size:14px;color:#666">
+                💡 Сеть не даёт явных правил, но автоматически учит нелинейные взаимодействия!
+            </p>
+        </section>
+        
+        <!-- Ключевые выводы -->
+        <section>
+            <h2>🧩 Ключевые выводы</h2>
+            <div class="cards">
+                <div class="card">
+                    <strong>1. Универсальный аппроксиматор</strong>
+                    Может выучить почти любую зависимость при достаточных данных
+                </div>
+                <div class="card">
+                    <strong>2. Backpropagation</strong>
+                    Сеть сама понимает, какие веса менять для уменьшения ошибки
+                </div>
+                <div class="card">
+                    <strong>3. Сигмоида = нелинейность</strong>
+                    Без неё сеть была бы просто линейной регрессией
+                </div>
+                <div class="card">
+                    <strong>4. MSE=0.004</strong>
+                    Сеть хорошо уловила связь между признаками и целью
+                </div>
+            </div>
+        </section>
+        
+        <div class="footer">
+            Обновлено: <span id="date"></span> | 
+            <a href="https://github.com/zoyahfc/i-word" target="_blank">GitHub репозиторий</a>
+            <script>document.getElementById('date').textContent = new Date().toLocaleDateString('ru-RU');</script>
+        </div>
+    </div>
+</body>
+</html>
   
 </body>
 </html>
