@@ -799,6 +799,143 @@ def build_tree_image():
 # Запуск после загрузки страницы
 build_tree_image()
 </script>
+  <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты модели | Students Performance</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .metric-card:hover { transform: translateY(-5px); }
+        .metric-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .metric-name {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .info-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .info-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        .info-grid strong { color: #333; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            font-size: 12px;
+        }
+        .footer a { color: #667eea; text-decoration: none; }
+        @media (max-width: 768px) {
+            .metrics { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Результаты модели</h1>
+        <p class="subtitle">Students Performance — Предсказание оценок по математике</p>
+        
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-name">MSE</div>
+                <div class="metric-value">0.004016</div>
+                <div style="font-size:12px;opacity:0.8">Среднеквадратичная ошибка</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-name">RMSE</div>
+                <div class="metric-value">0.063374</div>
+                <div style="font-size:12px;opacity:0.8">Корень из MSE</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-name">MAE</div>
+                <div class="metric-value">0.048755</div>
+                <div style="font-size:12px;opacity:0.8">Средняя абсолютная ошибка</div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h3>ℹ️ Параметры модели</h3>
+            <div class="info-grid">
+                <div><strong>Признаки:</strong><br>gender, lunch, test preparation course, reading score</div>
+                <div><strong>Целевая переменная:</strong><br>math score</div>
+                <div><strong>Архитектура:</strong><br>4 → 2 → 1</div>
+                <div><strong>Эпохи:</strong><br>1000</div>
+                <div><strong>Learning rate:</strong><br>0.1</div>
+                <div><strong>Добавленный признак:</strong><br>reading score</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            Обновлено: <span id="date"></span> | 
+            <a href="https://github.com/zoyahfc/i-word" target="_blank">GitHub репозиторий</a>
+            <script>document.getElementById('date').textContent = new Date().toLocaleDateString('ru-RU');</script>
+        </div>
+    </div>
+</body>
+</html>
+  
 </body>
 </html>
 
